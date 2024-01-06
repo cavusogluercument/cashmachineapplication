@@ -22,6 +22,7 @@ Password 2929
 
 
 TR
+
 Bu proje, HTML, CSS ve JavaScript dilleri kullanılarak geliştirilen bir ATM simülasyonunu içermektedir. Temel amacı, kullanıcıların giriş yaparak hesapları üzerinden para çekme, para yatırma ve kredi çekme gibi işlemleri gerçekleştirebilmelerini sağlamaktır.
 
 Özellikler
