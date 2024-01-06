@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bankamatik  Uygulaması</title>
+    <!-- Font Ayarlarım -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto+Mono:wght@100&display=swap"
+    rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+ 
+    <!-- AOS kütüphanesi -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Burada div e alınıp hepsine data aos ayarlanabilir  -->
+        <img src="img/ziraat.png" alt="ziraatbank" data-aos="zoom-in-up" data-aos-duration="1000">
+        <img src="img/garanti.png" alt="ggarantibank" data-aos="zoom-in-up" data-aos-duration="1000">
+        <img src="img/isbank.png" alt="isbank" data-aos="zoom-in-up" data-aos-duration="1000">
+        <img src="img/akbank.png" alt="akbank" data-aos="zoom-in-up" data-aos-duration="1000">
+        <img src="img/halkbank.png" alt="halkbank" data-aos="zoom-in-up" data-aos-duration="1000">
+        <img src="img/yapikredi.png" alt="yapikredi" data-aos="zoom-in-up" data-aos-duration="1000">
+        <img src="img/ingbank.png" alt="ingbank" data-aos="zoom-in-up" data-aos-duration="1000">
+        <img src="img/kuveytturk.png" alt="kuveytturk" data-aos="zoom-in-up" data-aos-duration="1000">
+        <img src="img/teb.png" alt="tebbank" data-aos="zoom-in-up" data-aos-duration="1000">
+        
+        
+        <h1 data-aos="fade-down" data-aos-duration="1000" >ARDASA BANKAMATİK</h1>
+        <form>
+            <label for="kullaniciAdi"></label>
+            <input type="text"  id="kullaniciAdi" name="kullaniciAdi" placeholder="Kullanıcı adınızı giriniz . . ." data-aos="fade-right" data-aos-duration="1000"><br><br>
+
+            <label for="sifre"></label>
+            <input type="password" id="sifre" name="sifre" placeholder="Şifrenizi giriniz . . ." data-aos="fade-left" data-aos-duration="2000"><br><br>
+
+            <button type="button" onclick="girisYap()" data-aos="fade-up" data-aos-duration="2000">GİRİŞ YAP</button></
+        </form>
+    </div>
+
+
+    <script>
+        let bakiye = 1000000;
+        //let kalanBakiye = bakiye - cekilenTutar;
+
+        function girisYap() 
+        {
+            let kullaniciAdi = document.getElementById("kullaniciAdi").value;
+            let sifre = document.getElementById("sifre").value;
+
+
+            if (kullaniciAdi == "Ercu" && sifre == "2929") 
+            {
+                alert("Giriş başarılı. İşlemler sayfasına yönlendiriliyorsunuz...");
+
+                let islemler = prompt("İşlemler Sayfasına Hoş Geldiniz: \nLütfen Yapmak İstediğiniz İşlemin numarasını aşağıdaki kutucuğa giriniz.\n\n1-Para çek\n\n2-Para yatır\n\n3-Kredi çek");
+
+                if (islemler == "1") 
+                {
+
+                    alert("Hesabınızda olan bakiyeniz=" + bakiye);
+                    let cekilenTutar = Number(prompt("Çekmek istediğiniz turarı giriniz:"));
+                    if (cekilenTutar <= 0 || cekilenTutar > bakiye) 
+                    {
+                        alert("Geçersiz tutar");
+                    }
+                    else 
+                    {
+                        bakiye -= cekilenTutar;
+                        alert("Çekilen Tutar: " + cekilenTutar.toFixed(2) +" ₺" + " Kalan Bakiye: " + bakiye.toFixed(2) + " ₺");
+                    }
+                }
+
+                    else if (islemler == "2") 
+                    {
+                        alert("Hesabınızda olan bakiyeniz=" + bakiye.toFixed(2) +" ₺");
+                        let yatirilanPara = Number(prompt("Ne kadar yatırmak istiyorsunuz ?"));
+                        if (yatirilanPara <=0) 
+                        {
+                        alert("Hata!...Bankamızca belirlenen en alt para yatırma limiti 50TL dir.");
+                        }
+                        else {
+                            bakiye += yatirilanPara;
+                            alert("Yatırılan Tutar: " + yatirilanPara.toFixed(2) + " ₺" + "\n" + "Toplam Bakiye: "  + bakiye.toFixed(2) +" ₺");
+                        }
+                    } 
+                    else if (islemler == "3") 
+                    {
+                        let krediTutari = Number(prompt("Çekmek istediğiniz kredi miktarını giriniz:"));
+                        if (krediTutari <= 0) 
+                        {
+                            alert("Hata!... Geçersiz kredi miktarı.");
+                        } 
+                        else 
+                        {
+                            let vade = 12;
+                            let faizOrani = 3.98;
+                            let aylikOdeme = (krediTutari * faizOrani) / vade;
+                            let toplamOdeme = krediTutari + (krediTutari * faizOrani);
+                            bakiye += krediTutari;
+                            
+                            alert("Çekilen kredi miktarı: " + krediTutari + " ₺\nToplam Geri Ödeme: " + toplamOdeme + " ₺\nAylık Ödeme: " + aylikOdeme.toFixed(2) + " ₺\nToplam Bakiye: " + bakiye + " ₺");
+                        }
+                    } else {
+                        alert("Geçersiz İşlem");
+                    }
+                } else {
+                    alert("Kullanıcı adı veya şifre hatalı...");
+                }
+            }
+
+
+        
+            AOS.init();
+            
+    </script>
+
+
+
+</body>
+
+</html>
